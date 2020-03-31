@@ -25,6 +25,10 @@ public class CallListener extends BroadcastReceiver {
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             MyPhoneStateListener listener = new MyPhoneStateListener(context);
             telephonyManager.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
+//            if(intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(TelephonyManager.CALL_STATE_OFFHOOK))
+//            {
+//                Toast.makeText(context, intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER), Toast.LENGTH_LONG).show();
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,10 +48,14 @@ class MyPhoneStateListener extends PhoneStateListener{
     public void onCallStateChanged(int state, String phoneNumber) {
 
         Log.d("income",phoneNumber);
-
+        Log.d("income",String.valueOf(state));
         if (state == TelephonyManager.CALL_STATE_RINGING)
         {
             Toast.makeText(mContext, "Incoming Number is: "+phoneNumber, Toast.LENGTH_LONG).show();
+        }
+        else if (state == TelephonyManager.CALL_STATE_IDLE)
+        {
+            Toast.makeText(mContext, "Phone Hung Up", Toast.LENGTH_LONG).show();
         }
 
     }
