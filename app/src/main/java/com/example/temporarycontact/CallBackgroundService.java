@@ -22,7 +22,7 @@ public class CallBackgroundService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-//        new CallListener().onReceive(this, intent);
+        new CallListener().onReceive(this, intent);
 
         startJob();
 
