@@ -35,28 +35,3 @@ public class CallListener extends BroadcastReceiver {
         }
     }
 }
-
-class MyPhoneStateListener extends PhoneStateListener{
-
-    Context mContext;
-
-    public MyPhoneStateListener(Context mContext) {
-        this.mContext = mContext;
-    }
-
-    @Override
-    public void onCallStateChanged(int state, String phoneNumber) {
-
-        Log.d("income",phoneNumber);
-        Log.d("income",String.valueOf(state));
-        if (state == TelephonyManager.CALL_STATE_RINGING)
-        {
-            Toast.makeText(mContext, "Incoming Number is: "+phoneNumber, Toast.LENGTH_LONG).show();
-        }
-        else if (state == TelephonyManager.CALL_STATE_IDLE)
-        {
-            Toast.makeText(mContext, "Phone Hung Up", Toast.LENGTH_LONG).show();
-        }
-
-    }
-}
