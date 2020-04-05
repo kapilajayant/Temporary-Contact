@@ -14,21 +14,10 @@ public class CallListener extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         try {
-            //            String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
-//            String incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-//
-//            if (state.equals(TelephonyManager.EXTRA_STATE_RINGING))
-//            {
-//                Toast.makeText(context, "Ringing State Number is - " + incomingNumber, Toast.LENGTH_SHORT).show();
-//                Log.e("hui",incomingNumber);
-//            }
+
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             MyPhoneStateListener listener = new MyPhoneStateListener(context);
             telephonyManager.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
-//            if(intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(TelephonyManager.CALL_STATE_OFFHOOK))
-//            {
-//                Toast.makeText(context, intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER), Toast.LENGTH_LONG).show();
-//            }
 
         } catch (Exception e) {
             e.printStackTrace();
