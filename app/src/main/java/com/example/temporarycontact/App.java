@@ -10,7 +10,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(new Intent(this, CallBackgroundService.class));
+//            startForegroundService(new Intent(this, CallBackgroundService.class));
         }
     }
 }
