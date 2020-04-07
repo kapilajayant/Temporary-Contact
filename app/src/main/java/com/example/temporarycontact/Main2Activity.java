@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,13 +87,17 @@ public class Main2Activity extends AppCompatActivity {
 
     private void addContact(String contactName){
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ContactsContract.Data.CONTACT_ID,numberOfContacts+1);
-        contentValues.put(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
-        contentValues.put(ContactsContract.CommonDataKinds.Phone.LABEL, contactName);
-        contentValues.put(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM);
-        contentValues.put(ContactsContract.CommonDataKinds.Phone.NUMBER, phoneNumber);
-        getContentResolver().insert(ContactsContract.Data.CONTENT_URI, contentValues);
+        ContentValues values = new ContentValues();
+        values.put(Contacts.People.NUMBER, phoneNumber);
+        values.put(Contacts.People.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM);
+        values.put(Contacts.People.LABEL, contactName);
+        values.put(Contacts.People.NAME, contactName);
+        Uri dataUri = getContentResolver().insert(Contacts.People.CONTENT_URI, values);
+        Uri updateUri = Uri.withAppendedPath(dataUri, Contacts.People.Phones.CONTENT_DIRECTORY);
+        values.clear();
+        values.put(Contacts.People.Phones.TYPE, Contacts.People.TYPE_MOBILE);
+        values.put(Contacts.People.NUMBER, phoneNumber);
+        updateUri = getContentResolver().insert(updateUri, values);
 
     }
 }
