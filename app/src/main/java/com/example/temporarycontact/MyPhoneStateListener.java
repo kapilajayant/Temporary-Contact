@@ -20,9 +20,18 @@ import android.widget.Toast;
 public class MyPhoneStateListener extends PhoneStateListener {
 
     Context mContext;
+    private static MyPhoneStateListener instance = null;
 
     public MyPhoneStateListener(Context mContext) {
         this.mContext = mContext;
+    }
+
+    public static MyPhoneStateListener getInstance(Context context){
+        if (instance == null)
+        {
+            instance = new MyPhoneStateListener(context);
+        }
+        return instance;
     }
 
     @Override
@@ -36,40 +45,14 @@ public class MyPhoneStateListener extends PhoneStateListener {
         }
         else if (state == TelephonyManager.CALL_STATE_IDLE)
         {
-            Toast.makeText(mContext, "Phone Hung Up", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(mContext, Main2Activity.class);
-            intent.putExtra("phoneNumber", phoneNumber);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(intent);
-//            addContactDialog();
+//            Toast.makeText(mContext, "Phone Hung Up", Toast.LENGTH_LONG).show();
+            if (!phoneNumber.isEmpty())
+            {
+                Intent intent = new Intent(mContext, Main2Activity.class);
+                intent.putExtra("phoneNumber", phoneNumber);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
         }
-
     }
-//    public void addContactDialog() {
-//        final Dialog mDialog = new Dialog(mContext);
-//        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        mDialog.setContentView(R.layout.add_contact);
-//        final EditText et_contact = mDialog.findViewById(R.id.et_contact);
-//        TextView ok,cancel;
-//        ok=(TextView) mDialog.findViewById(R.id.ok);
-//        cancel=(TextView) mDialog.findViewById(R.id.cancel);
-//        ok.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(mContext, "Contact Added", Toast.LENGTH_LONG).show();
-//                mDialog.cancel();
-//
-//            }
-//        });
-//        cancel.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(mContext, "Cancelled", Toast.LENGTH_LONG).show();
-//                mDialog.cancel();
-//            }
-//        });
-//        mDialog.show();
-//    }
 }
