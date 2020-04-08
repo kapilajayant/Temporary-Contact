@@ -90,7 +90,8 @@ public class Main2Activity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(Contacts.People.NUMBER, phoneNumber);
         values.put(Contacts.People.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM);
-        values.put(Contacts.People.LABEL, contactName);
+        values.put(Contacts.People.LABEL, "Temporary-Contact");
+//        values.put(ContactsContract.CommonDataKinds.Organization.COMPANY, "Temporary-Contact");
         values.put(Contacts.People.NAME, contactName);
         Uri dataUri = getContentResolver().insert(Contacts.People.CONTENT_URI, values);
         Uri updateUri = Uri.withAppendedPath(dataUri, Contacts.People.Phones.CONTENT_DIRECTORY);
