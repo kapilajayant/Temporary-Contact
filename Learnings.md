@@ -1,3 +1,3 @@
 # Learnings
-##### BroadCast Reveiver
-##### Read Call Events
+* BroadCast Reveiver
+* Read Call Events
