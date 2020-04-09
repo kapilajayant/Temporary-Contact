@@ -20,6 +20,7 @@
         android:id="@+id/et_contact"
         android:textColor="@android:color/white"
         android:hint="Add Contact Name"
+        android:textColorHint="@android:color/white"
         android:focusedByDefault="true"
         android:inputType="textMultiLine"
         android:layout_marginStart="30dp"
