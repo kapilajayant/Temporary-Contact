@@ -22,7 +22,6 @@
             android:padding="10dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_travel_24dp"
             android:background="@drawable/circlepink" />
 
         <RelativeLayout
@@ -38,16 +37,16 @@
                 android:layout_marginLeft="30dp"
                 android:textStyle="bold"
                 android:textSize="20dp"
-                android:id="@+id/tv_spent"/>
+                android:id="@+id/tv_name"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_below="@id/tv_spent"
+                android:layout_below="@id/tv_name"
                 android:textSize="20dp"
                 android:layout_marginTop="20dp"
                 android:text="Contact Number"
-                android:id="@+id/tv_date"/>
+                android:id="@+id/tv_number"/>
         </RelativeLayout>
 
     </RelativeLayout>
