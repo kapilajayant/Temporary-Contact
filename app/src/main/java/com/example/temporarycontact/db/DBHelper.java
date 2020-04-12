@@ -1,10 +1,17 @@
 package com.example.temporarycontact.db;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.example.temporarycontact.Model.TempContact;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -14,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table tempContact(id integer primary key autoincrement, contactName text, time text)");
+        sqLiteDatabase.execSQL("create table tempContact(id integer primary key autoincrement, contactName text, contactNumber text, contactTime text)");
     }
 
     @Override
@@ -22,4 +29,24 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("drop table if exists tempContact");
         onCreate(sqLiteDatabase);
     }
+
+    public List<TempContact> getContacts(){
+        List<TempContact> contactList = new ArrayList<TempContact>();
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM tempContact", null);
+        if(cursor.getCount() != 0){
+            while (cursor.moveToNext()){
+                TempContact tempContact = new TempContact();
+                String contactName = cursor.getString(cursor.getColumnIndex("contactName"));
+                String contactNumber = cursor.getString(cursor.getColumnIndex("contactNumber"));
+                String contactTime = cursor.getString(cursor.getColumnIndex("contactTime"));
+                tempContact.setContactName(contactName);
+                tempContact.setContactNumber(contactNumber);
+                tempContact.setContactTime(contactTime);
+                contactList.add(tempContact);
+            }
+        }
+        return contactList;
+    }
+    
 }
