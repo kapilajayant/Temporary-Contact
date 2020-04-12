@@ -19,6 +19,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.temporarycontact.Model.TempContact;
+import com.example.temporarycontact.db.DBHelper;
+
 public class Main2Activity extends AppCompatActivity {
 
     String phoneNumber;
@@ -86,7 +89,11 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     private void addContact(String contactName){
-        
+
+        TempContact tempContact = new TempContact();
+        tempContact.setContactName(contactName);
+        tempContact.setContactNumber(phoneNumber);
+        tempContact.setContactTime("Tomorrow");
         ContentValues values = new ContentValues();
         values.put(Contacts.People.NUMBER, phoneNumber);
         values.put(Contacts.People.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM);
@@ -99,6 +106,6 @@ public class Main2Activity extends AppCompatActivity {
         values.put(Contacts.People.Phones.TYPE, Contacts.People.TYPE_MOBILE);
         values.put(Contacts.People.NUMBER, phoneNumber);
         updateUri = getContentResolver().insert(updateUri, values);
-
+        new DBHelper(Main2Activity.this).addContact(tempContact);
     }
 }
