@@ -2,13 +2,11 @@ package com.example.temporarycontact.Model;
 
 public class TempContact
 {
-    String ContactName, ContactNumber;
+    String ContactName, ContactNumber, contactTime;
 
-    public TempContact(String contactName, String contactNumber) {
-        ContactName = contactName;
-        ContactNumber = contactNumber;
+    public TempContact() {
+
     }
-
     public String getContactName() {
         return ContactName;
     }
@@ -23,5 +21,13 @@ public class TempContact
 
     public void setContactNumber(String contactNumber) {
         ContactNumber = contactNumber;
+    }
+
+    public String getContactTime() {
+        return contactTime;
+    }
+
+    public void setContactTime(String contactTime) {
+        this.contactTime = contactTime;
     }
 }
