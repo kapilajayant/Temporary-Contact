@@ -15,6 +15,8 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
+    String tableName = "tempContact";
+
     public DBHelper(Context context) {
         super(context , "TempContactDB", null, 1);
     }
@@ -48,5 +50,19 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return contactList;
     }
-    
+
+    public void addContact(TempContact tempContact) {
+
+        SQLiteDatabase database = this.getWritableDatabase();
+        String contactName = tempContact.getContactName();
+        String contactNumber = tempContact.getContactNumber();
+        String contactTime = tempContact.getContactTime();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("contactName", contactName);
+        contentValues.put("contactNumber", contactNumber);
+        contentValues.put("contactTime", contactTime);
+        database.insert("tempContact", null, contentValues);
+
+    }
+
 }

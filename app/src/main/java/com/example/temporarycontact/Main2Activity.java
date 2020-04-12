@@ -86,7 +86,7 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     private void addContact(String contactName){
-
+        
         ContentValues values = new ContentValues();
         values.put(Contacts.People.NUMBER, phoneNumber);
         values.put(Contacts.People.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM);
