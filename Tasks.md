@@ -9,3 +9,4 @@
 - [ ] Foreground Service
 - [ ] Delete contacts
 - [ ] Swipe gestures to delete or call
+- [ ] Add FAB to add contact on MainActivity
