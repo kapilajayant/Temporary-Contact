@@ -35,7 +35,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv_name.setText("₹"+tempContactList.get(position).getContactName());
+        holder.tv_name.setText(tempContactList.get(position).getContactName());
         holder.tv_number.setText(tempContactList.get(position).getContactNumber());
     }
 
