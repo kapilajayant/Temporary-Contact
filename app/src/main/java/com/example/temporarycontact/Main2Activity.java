@@ -44,8 +44,9 @@ public class Main2Activity extends AppCompatActivity {
         ViewGroup viewGroup = findViewById(android.R.id.content);
         final View dialogView = LayoutInflater.from(this).inflate(R.layout.add_contact, viewGroup, false);
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final EditText et = dialogView.findViewById(R.id.et_contact);
-        et.setHint(getIntent().getExtras().getString("phoneNumber"));
+        final EditText et = dialogView.findViewById(R.id.et_contactName);
+        final EditText etNumber = dialogView.findViewById(R.id.et_contactNumber);
+        etNumber.setText(getIntent().getExtras().getString("phoneNumber"));
         et.requestFocus();
         final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
