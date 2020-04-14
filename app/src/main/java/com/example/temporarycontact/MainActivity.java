@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.temporarycontact.Adapter.ContactsAdapter;
@@ -36,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         rv = findViewById(R.id.rv);
+
+        findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Main2Activity().addContactDialog();
+            }
+        });
 
         checkPermission(perms[0],1);
         checkPermission(perms[1],1);

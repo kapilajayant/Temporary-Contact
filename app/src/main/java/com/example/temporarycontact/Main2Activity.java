@@ -40,6 +40,7 @@ public class Main2Activity extends AppCompatActivity {
             addContactDialog();
         }
     }
+
     public void addContactDialog()  {
         ViewGroup viewGroup = findViewById(android.R.id.content);
         final View dialogView = LayoutInflater.from(this).inflate(R.layout.add_contact, viewGroup, false);
