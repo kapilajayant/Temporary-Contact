@@ -55,9 +55,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean deleteContact(Context context, String phoneNumber){
         SQLiteDatabase database = this.getWritableDatabase();
-        Cursor cursor = database.rawQuery("DELETE FROM tempContact where contactNumber = "+phoneNumber, null);
-        Toast.makeText(context, String.valueOf(cursor.getCount()), Toast.LENGTH_SHORT).show();
-        if (cursor.getCount() > 0)
+//        Cursor cursor = database.rawQuery("DELETE FROM tempContact where contactNumber = "+phoneNumber, null);
+        int deletedRows = database.delete("tempContact", "contactNumber = ?", new String[] {phoneNumber});
+        Toast.makeText(context, String.valueOf(deletedRows), Toast.LENGTH_SHORT).show();
+        if (deletedRows > 0)
             return true;
         else
             return false;
