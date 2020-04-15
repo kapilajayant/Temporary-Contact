@@ -24,8 +24,8 @@ import com.example.temporarycontact.db.DBHelper;
 
 public class Main2Activity extends AppCompatActivity {
 
-    String phoneNumber;
-    int numberOfContacts;
+    private String phoneNumber;
+    private int numberOfContacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
