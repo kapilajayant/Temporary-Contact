@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private boolean isDeleted;
     ItemTouchHelper.SimpleCallback simpleCallback =
             new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
                 @Override
@@ -116,9 +117,16 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    isDeleted = new DBHelper(MainActivity.this).deleteContact(getApplicationContext(), contactList.get(viewHolder.getAdapterPosition()).getContactNumber());
+                    if (isDeleted){
+                        Toast.makeText(MainActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this, "Delete failed", Toast.LENGTH_SHORT).show();
+                    }
                     contactList.remove(viewHolder.getAdapterPosition());
                     adapter.notifyDataSetChanged();
-                    new DBHelper(MainActivity.this).deleteContact(contactList.get(viewHolder.getAdapterPosition()));
                 }
             };
 
@@ -150,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                         if (et.getText().toString().length()>0)
                         {
                             addContact(et.getText().toString(),etNumber.getText().toString());
+                            adapter.notifyDataSetChanged();
                             Toast.makeText(getApplicationContext(), "Contact Added", Toast.LENGTH_SHORT).show();
                         }
                     }

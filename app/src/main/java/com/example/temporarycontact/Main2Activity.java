@@ -35,6 +35,7 @@ public class Main2Activity extends AppCompatActivity {
         numberOfContacts = cursor.getCount();
         Toast.makeText(getApplicationContext(), String.valueOf(numberOfContacts), Toast.LENGTH_LONG).show();
         phoneNumber = getIntent().getExtras().getString("phoneNumber");
+        new MainActivity().adapter.notifyDataSetChanged();
         if(!phoneNumber.isEmpty())
         {
             addContactDialog();

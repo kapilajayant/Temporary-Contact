@@ -5,9 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.temporarycontact.MainActivity;
 import com.example.temporarycontact.Model.TempContact;
 
 import java.util.ArrayList;
@@ -51,9 +53,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return contactList;
     }
 
-    public void deleteContact(TempContact tempContact){
+    public boolean deleteContact(Context context, String phoneNumber){
         SQLiteDatabase database = this.getWritableDatabase();
-        Cursor cursor = database.rawQuery("DELETE FROM tempContact where contactNumber = "+tempContact.getContactNumber(), null);
+        Cursor cursor = database.rawQuery("DELETE FROM tempContact where contactNumber = "+phoneNumber, null);
+        Toast.makeText(context, String.valueOf(cursor.getCount()), Toast.LENGTH_SHORT).show();
+        if (cursor.getCount() > 0)
+            return true;
+        else
+            return false;
     }
 
     public void addContact(TempContact tempContact) {
