@@ -51,6 +51,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return contactList;
     }
 
+    public void deleteContact(TempContact tempContact){
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery("DELETE FROM tempContact where contactNumber = "+tempContact.getContactNumber(), null);
+    }
+
     public void addContact(TempContact tempContact) {
 
         SQLiteDatabase database = this.getWritableDatabase();

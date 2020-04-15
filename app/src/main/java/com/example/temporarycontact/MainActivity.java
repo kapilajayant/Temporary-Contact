@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                     contactList.remove(viewHolder.getAdapterPosition());
                     adapter.notifyDataSetChanged();
+                    new DBHelper(MainActivity.this).deleteContact(contactList.get(viewHolder.getAdapterPosition()));
                 }
             };
 
