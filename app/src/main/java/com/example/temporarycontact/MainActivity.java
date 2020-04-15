@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +33,9 @@ import com.example.temporarycontact.db.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.recyclerview.animators.SlideInDownAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,11 +70,12 @@ public class MainActivity extends AppCompatActivity {
         rv.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         rv.setLayoutManager(layoutManager);
-
         contactList = new DBHelper(MainActivity.this).getContacts();
         adapter = new ContactsAdapter(contactList,MainActivity.this);
-
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(rv);
         rv.setAdapter(adapter);
+        rv.scrollToPosition(0);
+        rv.setItemAnimator(new SlideInUpAnimator());
         adapter.notifyDataSetChanged();
 
     }
@@ -101,6 +106,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback =
+            new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+                @Override
+                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    contactList.remove(viewHolder.getAdapterPosition());
+                    adapter.notifyDataSetChanged();
+                }
+            };
 
     public void addContactDialog()  {
         ViewGroup viewGroup = findViewById(android.R.id.content);
