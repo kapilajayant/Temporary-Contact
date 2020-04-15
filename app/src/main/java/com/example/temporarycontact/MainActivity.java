@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         builder.setView(dialogView);
-        builder.setCancelable(true);
+        builder.setCancelable(false);
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -132,15 +132,6 @@ public class MainActivity extends AppCompatActivity {
                             addContact(et.getText().toString(),etNumber.getText().toString());
                             Toast.makeText(getApplicationContext(), "Contact Added", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                }
-        );
-
-        builder.setOnCancelListener(
-                new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialogInterface) {
-                        Toast.makeText(getApplicationContext(), "Cancelled", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
