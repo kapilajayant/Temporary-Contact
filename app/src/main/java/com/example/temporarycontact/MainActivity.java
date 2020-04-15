@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Contacts;
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     isDeleted = new DBHelper(MainActivity.this).deleteContact(getApplicationContext(), contactList.get(viewHolder.getAdapterPosition()).getContactNumber());
                     if (isDeleted){
                         Toast.makeText(MainActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
+                        deleteContact(MainActivity.this, contactList.get(viewHolder.getAdapterPosition()).getContactNumber(), contactList.get(viewHolder.getAdapterPosition()).getContactName());
                     }
                     else
                     {
@@ -187,6 +189,30 @@ public class MainActivity extends AppCompatActivity {
         values.put(Contacts.People.NUMBER, phoneNumber);
         updateUri = getContentResolver().insert(updateUri, values);
         new DBHelper(MainActivity.this).addContact(tempContact);
+    }
+
+    public static boolean deleteContact(Context ctx, String phone, String name) {
+        Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phone));
+        Cursor cur = ctx.getContentResolver().query(contactUri, null, null, null, null);
+        try {
+            if (cur.moveToFirst()) {
+                do {
+                    if (cur.getString(cur.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME)).equalsIgnoreCase(name)) {
+                        String lookupKey = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+                        Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_LOOKUP_URI, lookupKey);
+                        ctx.getContentResolver().delete(uri, null, null);
+                        return true;
+                    }
+
+                } while (cur.moveToNext());
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        } finally {
+            cur.close();
+        }
+        return false;
     }
 
 }
