@@ -7,6 +7,6 @@
 - [x] Show Temporarily added contacts
 - [x] Update Add contact dialog
 - [ ] Foreground Service
-- [ ] Delete contacts
-- [ ] Swipe gestures to delete or call
+- [x] Delete contacts
+- [x] Swipe gestures to delete
 - [x] Add FAB to add contact on MainActivity
