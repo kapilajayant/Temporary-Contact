@@ -10,3 +10,4 @@
 - [x] Delete contacts
 - [x] Swipe gestures to delete
 - [x] Add FAB to add contact on MainActivity
+- [ ] Add Timer to dialog
