@@ -26,11 +26,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.temporarycontact.Adapter.ContactsAdapter;
 import com.example.temporarycontact.Model.TempContact;
 import com.example.temporarycontact.db.DBHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     ContactsAdapter adapter;
     private String phoneNumber;
     private int numberOfContacts;
+    RelativeLayout rl;
     List<TempContact> contactList = new ArrayList<TempContact>();
     String[] perms = {Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CALL_LOG, Manifest.permission.FOREGROUND_SERVICE};
 
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         rv = findViewById(R.id.rv);
+        rl = findViewById(R.id.rl);
 
         findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     if (isDeleted){
                         Toast.makeText(MainActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
                         deleteContact(MainActivity.this, contactList.get(viewHolder.getAdapterPosition()).getContactNumber(), contactList.get(viewHolder.getAdapterPosition()).getContactName());
+//                        Snackbar.make(rv, "Contact Deleted", Snackbar.LENGTH_LONG).show();
                     }
                     else
                     {
@@ -189,6 +194,8 @@ public class MainActivity extends AppCompatActivity {
         values.put(Contacts.People.NUMBER, phoneNumber);
         updateUri = getContentResolver().insert(updateUri, values);
         new DBHelper(MainActivity.this).addContact(tempContact);
+        startActivity(new Intent(MainActivity.this, MainActivity.class));
+        finish();
     }
 
     public static boolean deleteContact(Context ctx, String phone, String name) {
