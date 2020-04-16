@@ -35,7 +35,6 @@ public class Main2Activity extends AppCompatActivity {
         numberOfContacts = cursor.getCount();
         Toast.makeText(getApplicationContext(), String.valueOf(numberOfContacts), Toast.LENGTH_LONG).show();
         phoneNumber = getIntent().getExtras().getString("phoneNumber");
-        new MainActivity().adapter.notifyDataSetChanged();
         if(!phoneNumber.isEmpty())
         {
             addContactDialog();
@@ -48,18 +47,18 @@ public class Main2Activity extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final EditText et = dialogView.findViewById(R.id.et_contactName);
         final EditText etNumber = dialogView.findViewById(R.id.et_contactNumber);
-        etNumber.setText(getIntent().getExtras().getString("phoneNumber"));
+        etNumber.setHint("Enter Phone Number");
         et.requestFocus();
         final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         builder.setView(dialogView);
-        builder.setCancelable(true);
+        builder.setCancelable(false);
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(dialogView.getWindowToken(), 0);
-                finishAffinity();
+                finish();
             }
         });
         builder.setPositiveButton("Add",
@@ -73,17 +72,6 @@ public class Main2Activity extends AppCompatActivity {
                             addContact(et.getText().toString());
                             Toast.makeText(getApplicationContext(), "Contact Added", Toast.LENGTH_SHORT).show();
                         }
-                        finish();
-                    }
-                }
-        );
-
-        builder.setOnCancelListener(
-                new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialogInterface) {
-                        Toast.makeText(getApplicationContext(), "Cancelled", Toast.LENGTH_SHORT).show();
-                        finish();
                     }
                 }
         );
@@ -110,5 +98,6 @@ public class Main2Activity extends AppCompatActivity {
         values.put(Contacts.People.NUMBER, phoneNumber);
         updateUri = getContentResolver().insert(updateUri, values);
         new DBHelper(Main2Activity.this).addContact(tempContact);
+        finish();
     }
 }
