@@ -44,6 +44,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ViewHolder> {
         return tempContactList.size();
     }
 
+    public void restoreItem(TempContact item, int position) {
+        tempContactList.add(position, item);
+        notifyItemInserted(position);
+    }
+
 }
 class ViewHolder extends RecyclerView.ViewHolder {
 
