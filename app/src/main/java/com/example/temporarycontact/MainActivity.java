@@ -39,6 +39,7 @@ import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.SlideInDownAnimator;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+import ru.alexbykov.nopermission.PermissionHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,11 +67,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        checkPermission(perms[0],1);
-        checkPermission(perms[1],1);
-        checkPermission(perms[2],1);
-        checkPermission(perms[3],1);
-        checkPermission(perms[4],1);
+//        PermissionHelper permissionHelper = new PermissionHelper(this); //don't use getActivity in fragment!
+//
+//        permissionHelper.check(Manifest.permission.ACCESS_COARSE_LOCATION)
+//                .onSuccess(this::onSuccess)
+//                .onDenied(this::onDenied)
+//                .onNeverAskAgain(this::onNeverAskAgain)
+//                .run();
+
+//        checkPermission(perms[0],1);
+//        checkPermission(perms[1],1);
+//        checkPermission(perms[2],1);
+//        checkPermission(perms[3],1);
+//        checkPermission(perms[4],1);
 
         rv.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());

@@ -16,8 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Main2Activity" android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-        <!-- <service -->
-        <!-- android:name=".CallBackgroundService"/> -->
+
         <receiver android:name=".CallListener">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />

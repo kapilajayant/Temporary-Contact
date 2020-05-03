@@ -14,7 +14,6 @@ public class CallListener extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         try {
-
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             MyPhoneStateListener listener = MyPhoneStateListener.getInstance(context);
             telephonyManager.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
