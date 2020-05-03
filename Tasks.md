@@ -12,3 +12,4 @@
 - [x] Add FAB to add contact on MainActivity
 - [ ] Add Timer to dialog
 - [ ] Create Timer delete logic
+- [ ] Create delete dialog
