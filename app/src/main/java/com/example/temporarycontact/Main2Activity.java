@@ -47,7 +47,7 @@ public class Main2Activity extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final EditText et = dialogView.findViewById(R.id.et_contactName);
         final EditText etNumber = dialogView.findViewById(R.id.et_contactNumber);
-        etNumber.setHint(phoneNumber);
+        etNumber.setText(phoneNumber);
         et.requestFocus();
         final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);

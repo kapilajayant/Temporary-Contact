@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,6 +16,8 @@ import android.os.IBinder;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
+
+import static android.telephony.TelephonyManager.ACTION_PHONE_STATE_CHANGED;
 
 public class CallService extends Service {
 
@@ -25,13 +28,21 @@ public class CallService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        startServiceWithNotification();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startServiceWithNotification();
+            CallListener listener = new CallListener();
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(ACTION_PHONE_STATE_CHANGED);
+            this.registerReceiver(listener, intentFilter);
+        }
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null && intent.getAction().equals("myService")) {
-            startServiceWithNotification();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startServiceWithNotification();
+            }
         }
         else stopMyService();
         return START_STICKY;
