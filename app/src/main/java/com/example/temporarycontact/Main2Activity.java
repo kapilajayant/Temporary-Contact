@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
@@ -98,6 +99,11 @@ public class Main2Activity extends AppCompatActivity {
         values.put(Contacts.People.NUMBER, phoneNumber);
         updateUri = getContentResolver().insert(updateUri, values);
         new DBHelper(Main2Activity.this).addContact(tempContact);
-        finish();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            finishAndRemoveTask();
+        }
+        else {
+            super.finish();
+        }
     }
 }
