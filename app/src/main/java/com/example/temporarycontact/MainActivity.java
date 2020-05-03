@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent startIntent = new Intent(getApplicationContext(), CallService.class);
+        startIntent.setAction("myService");
+        startService(startIntent);
+
         rv = findViewById(R.id.rv);
         rl = findViewById(R.id.rl);
 
