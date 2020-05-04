@@ -6,10 +6,11 @@
 - [x] Make Database entry
 - [x] Show Temporarily added contacts
 - [x] Update Add contact dialog
-- [ ] Foreground Service
+- [x] Foreground Service
 - [x] Delete contacts
 - [x] Swipe gestures to delete
 - [x] Add FAB to add contact on MainActivity
 - [ ] Add Timer to dialog
 - [ ] Create Timer delete logic
 - [ ] Create delete dialog
+- [ ] Handle Permissions bug
