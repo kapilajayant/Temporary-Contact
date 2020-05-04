@@ -59,7 +59,13 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(dialogView.getWindowToken(), 0);
-                finish();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    finishAndRemoveTask();
+                }
+                else
+                {
+                    Main2Activity.super.finish();
+                }
             }
         });
         builder.setPositiveButton("Add",
@@ -77,8 +83,7 @@ public class Main2Activity extends AppCompatActivity {
                 }
         );
         AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
+        alertDialog.show();    }
 
     private void addContact(String contactName){
 

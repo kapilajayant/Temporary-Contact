@@ -79,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
 //                .onNeverAskAgain(this::onNeverAskAgain)
 //                .run();
 
-//        checkPermission(perms[0],1);
-//        checkPermission(perms[1],1);
-//        checkPermission(perms[2],1);
-//        checkPermission(perms[3],1);
-//        checkPermission(perms[4],1);
+        checkPermission(perms[0],1);
+        checkPermission(perms[1],1);
+        checkPermission(perms[2],1);
+        checkPermission(perms[3],1);
+        checkPermission(perms[4],1);
 
         rv.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());

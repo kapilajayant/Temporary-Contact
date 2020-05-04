@@ -30,11 +30,11 @@ public class CallService extends Service {
         super.onCreate();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startServiceWithNotification();
-            CallListener listener = new CallListener();
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(ACTION_PHONE_STATE_CHANGED);
-            this.registerReceiver(listener, intentFilter);
         }
+        CallListener listener = new CallListener();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ACTION_PHONE_STATE_CHANGED);
+        this.registerReceiver(listener, intentFilter);
     }
 
     @Override
@@ -84,9 +84,9 @@ public class CallService extends Service {
         manager.createNotificationChannel(chan);
 
         Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-                .setContentTitle(getResources().getString(R.string.app_name))
+                .setContentTitle("Temporary Contacts is Running")
                 .setTicker(getResources().getString(R.string.app_name))
-                .setContentText(getResources().getString(R.string.app_name))
+                .setContentText("Touch to open")
                 .setSmallIcon(R.drawable.ic_person_add_black_24dp)
                 .setContentIntent(contentPendingIntent)
                 .setOngoing(true)
